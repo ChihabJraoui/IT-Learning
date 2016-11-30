@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Exercice 04 - Drag & Drop</title>
+	<style>
+		body
+		{
+			text-align: center;
+		}
+		.container
+		{
+			display: inline-block;
+		}
+		.box
+		{
+			width: 400px;
+			height: 250px;
+			border: 2px dashed #AAA;
+			padding: 20px;
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+<body>
+
+<div class="container">
+	<div id="div1" class="box" ondragover="AuthDrop(event)" ondrop="drop(event)">
+		<img id="img1" src="bg.jpg" ondragstart="drag(event)" draggable="true" />
+	</div>
+	<div id="div2" class="box" ondragover="AuthDrop(event)" ondrop="drop(event)">
+	</div>
+</div>
+
+<script>
+	function AuthDrop(e)
+	{
+		e.preventDefault();
+	}
+
+	function drag(e)
+	{
+		e.dataTransfer.setData('text', e.target.id);
+	}
+
+	function drop(e)
+	{
+		e.preventDefault();
+
+		var id = e.dataTransfer.getData('text');
+		e.target.appendChild(document.getElementById(id));
+	}
+</script>
+
+</body>
+</html>

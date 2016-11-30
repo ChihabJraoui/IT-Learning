@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Exercice02</title>
+	<style>
+		body
+		{
+			text-align: center;
+		}
+		.container
+		{
+			display: inline-block;
+			max-width: 600px;
+		}
+		input[type=text]
+		{
+			padding: 20px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+
+<div class="container">
+
+	<form name="form" id="form">
+
+	</form>
+
+	<button onclick="aleatoir()">Load</button>
+	<button onclick="trier()">Sort</button>
+	<button onclick="inverser()">Reverse</button>
+	<button onclick="form.reset()">Clear</button>
+
+</div>
+
+<script>
+	function createTextBox()
+	{
+		for(var i = 0; i < 10; i++)
+		{
+			document.getElementById('form').innerHTML += '<input type="text" name="numbers" ' +
+					'style="margin: 0 10px 10px 0"  />'
+		}
+	}
+
+	createTextBox();
+
+	function aleatoir()
+	{
+		for(var i = 0; i < 10; i++)
+		{
+			form.numbers[i].value = Math.floor((Math.random() * 100) + 1);
+		}
+
+		moyenne();
+	}
+
+	function trier()
+	{
+		var table = [];
+
+		for(var i = 0; i < form.numbers.length; i++)
+		{
+			table.push(form.numbers[i].value);
+		}
+
+
+		table.sort(function (a, b) { return a-b; });
+
+		for(var i = 0; i < form.numbers.length; i++)
+		{
+			form.numbers[i].value = table[i];
+		}
+
+		moyenne();
+	}
+
+	function inverser()
+	{
+		var table = [];
+
+		for(var i = 0; i < form.numbers.length; i++)
+		{
+			table.push(form.numbers[i].value);
+		}
+
+		table.reverse();
+
+		for(var i = 0; i < form.numbers.length; i++)
+		{
+			form.numbers[i].value = table[i];
+		}
+
+		moyenne();
+	}
+
+	function moyenne()
+	{
+		var sum = 0;
+
+		for(var i = 0; i < 10; i++)
+		{
+			sum += parseInt(form.numbers[i].value);
+		}
+
+		var avg = sum / 10;
+
+		for (i = 0; i < 10; i++)
+		{
+			if (form.numbers[i].value > avg)
+			{
+				form.numbers[i].style.backgroundColor = 'lightgreen';
+			}
+			else
+			{
+				form.numbers[i].style.backgroundColor = 'lightcoral';
+			}
+		}
+	}
+
+</script>
+
+</body>
+</html>

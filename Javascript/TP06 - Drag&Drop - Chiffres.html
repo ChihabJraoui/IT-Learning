@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Drag&Drop</title>
+	<style>
+		body {
+			text-align: center;
+		}
+		.container
+		{
+			width: 306px;
+			height: 102px;
+			display: flex;
+			border: 1px solid black;
+			margin-bottom: 10px;
+		}
+		.box
+		{
+			display: inline-block;
+			height: 102px;
+			width: 102px;
+			box-sizing: border-box;
+			border: 1px dotted black;
+		}
+		.span
+		{
+			display: inline-block;
+			line-height: 100px;
+			width: 100px;
+			border: 1px solid #BBB;
+			font-size: 30px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+
+<div>
+	<div id="spanContainer" class="container" ondragover="AuthDrop(event)" ondrop="drop(event)">
+	</div>
+	<div class="container">
+		<div class="box" ondragover="AuthDrop(event)" ondrop="drop(event)" data-span="span-1"></div>
+		<div class="box" ondragover="AuthDrop(event)" ondrop="drop(event)" data-span="span-2"></div>
+		<div class="box" ondragover="AuthDrop(event)" ondrop="drop(event)" data-span="span-3"></div>
+	</div>
+</div>
+
+<script>
+	(function ()
+	{
+		for (var i = 0; i < 3; i++)
+		{
+			document.getElementById('spanContainer').innerHTML +=
+					'<span id="span-'+ (i+1) +'" class="span" ondragstart="drag(event)" draggable="true">'
+						+ (i+1) + '</span>';
+		}
+	})();
+
+	function AuthDrop(e)
+	{
+		e.preventDefault();
+	}
+
+	function drag(e)
+	{
+		e.dataTransfer.setData('text', e.target.id);
+	}
+
+	function drop(e)
+	{
+		e.preventDefault();
+
+		var id = e.dataTransfer.getData('text');
+
+//		console.log(e.target.getAttribute('data-span'));
+
+		if(e.target.getAttribute('data-span') == id)
+		{
+			e.target.appendChild(document.getElementById(id));
+		}
+		else
+		{
+			alert('error !');
+		}
+	}
+</script>
+
+</body>
+</html>

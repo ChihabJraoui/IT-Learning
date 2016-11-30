@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript - Exercice03 - Tic Tac Toe</title>
+
+	<style>
+		#container {
+			width: 306px;
+			margin: 20px auto;
+			background-color: cornsilk;
+		}
+		.controls {
+			display: block;
+			text-align: center;
+			padding: 20px;
+		}
+		.controls > span {
+			display: block;
+			font-family: Tahoma;
+			font-size: 30px;
+			margin-top: 20px;
+		}
+		.controls > button {
+			background-color: cadetblue;
+			border: none;
+			padding: 16px 24px;
+			color: white;
+			cursor: pointer;
+		}
+		.controls > button:hover {
+			background-color: darkslategray;
+		}
+
+		input[type=button] {
+			float: left;
+			vertical-align: top;
+			line-height: 100px;
+			width: 100px;
+			background-color: #EEE;
+			border: 1px solid #BBB;
+			font-size: 26px;
+			font-weight: bold;
+			font-family: tahoma;
+		}
+		input[type=button]:nth-child(4),
+		input[type=button]:nth-child(7) {
+			clear: left;
+		}
+	</style>
+</head>
+<body>
+
+<div id="container">
+	<div id="timer"></div>
+	<div id="ticTacToe"></div>
+	<div class="controls">
+		<button type="button" onclick="reset()">Reset</button>
+		<span id="status"></span>
+	</div>
+</div>
+
+<script>
+
+	// Variables
+	var tableau = [], time = 50, timer;
+
+	for(var i = 0; i < 9; i++)
+	{
+		tableau[i] = null;
+	}
+
+	(function ()
+	{
+		// Créer les cases
+		for(var i = 0; i < 9; i++)
+		{
+			document.getElementById('ticTacToe').innerHTML +=
+					'<input type="button" id="btn-'+ i +'" onClick="userPlay(this.id)" />';
+		}
+
+		timer = counter();
+
+	})();
+
+	// Demarer le compteur
+	function counter()
+	{
+		setInterval(function()
+		{
+			document.getElementById("timer").innerHTML = "Il reste: " + time +"s";
+
+			time--;
+
+		}, 1000);
+
+	}
+
+	// Role D'utilisateur
+	function userPlay(id)
+	{
+		var idSplite = id.split('-');
+		var index = idSplite[1];
+
+		tableau[index] = "x";
+		document.getElementById(id).value = "X";
+		document.getElementById(id).disabled = true;
+
+		// Verifier le gagnant
+		if(checkWinner('x'))
+		{
+			document.getElementById('status').style.color = "green";
+			document.getElementById('status').innerText = "You Win !";
+			disableButtons();
+			clearInterval(timer);
+			return false;
+		}
+
+		// Lancer le role du machine
+		machinePlay();
+	}
+
+	// Tour de la Machine
+	function machinePlay()
+	{
+		if(isTableFilled())
+		{
+			document.getElementById('status').style.color = "black";
+			document.getElementById('status').innerText = "Game Over. No One Wins !";
+			clearInterval(timer);
+		}
+		else
+		{
+			var rand;
+
+			do
+			{
+				rand = Math.floor(Math.random() * 8);
+			}
+			while(isSet(rand));
+
+			tableau[rand] = "o";
+			document.getElementById('btn-' + rand).value = "O";
+			document.getElementById('btn-' + rand).disabled = true;
+
+			if(checkWinner('o'))
+			{
+				document.getElementById('status').style.color = "red";
+				document.getElementById('status').innerText = "Computer Wins !";
+				disableButtons();
+				clearInterval(timer);
+			}
+		}
+	}
+
+	function checkWinner(value)
+	{
+		return (tableau[0] == value && tableau[1] == value && tableau[2] == value)
+			|| (tableau[3] == value && tableau[4] == value && tableau[5] == value)
+			|| (tableau[6] == value && tableau[7] == value && tableau[8] == value)
+			|| (tableau[0] == value && tableau[3] == value && tableau[6] == value)
+			|| (tableau[1] == value && tableau[4] == value && tableau[7] == value)
+			|| (tableau[2] == value && tableau[5] == value && tableau[8] == value)
+			|| (tableau[0] == value && tableau[4] == value && tableau[8] == value)
+			|| (tableau[2] == value && tableau[4] == value && tableau[6] == value);
+	}
+
+	function isSet(index)
+	{
+		return tableau[index] != null;
+	}
+
+	function isTableFilled()
+	{
+		for (var i = 0; i < tableau.length; i++)
+		{
+			if (!isSet(i))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	// Disactiver Tous Les Cases
+	function disableButtons()
+	{
+		for (var i = 0; i < 9; i++)
+		{
+			document.getElementById('btn-' + i).disabled = true;
+		}
+	}
+
+	// Relancer Le Jeux
+	function reset()
+	{
+		for(var i = 0; i < 9; i++)
+		{
+			// Vider la Table
+			tableau[i] = null;
+
+			// Vider Les Cases
+			document.getElementById('btn-' + i).value = "";
+			document.getElementById('btn-' + i).disabled = false;
+		}
+
+		document.getElementById('status').innerText = "";
+
+		time = 50;
+	}
+
+</script>
+
+</body>
+</html>
