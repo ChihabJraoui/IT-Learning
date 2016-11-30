@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Avion - CSS3 Animation</title>
+
+	<style>
+		.bg
+		{
+			position: relative;
+			background: url('img/back.png') 0 0;
+			width: 100%;
+			height: 200px;
+
+			animation: bgAnim 8s infinite;
+		}
+
+		.air-plane
+		{
+			position: absolute;
+			top: 40px;
+			left: 50px;
+			width: 350px;
+			height: 120px;
+			background-image: url('img/avion.png');
+
+			animation: planeAnim 8s infinite;
+		}
+
+
+
+		/* Animations */
+
+		@keyframes bgAnim
+		{
+			0%, 100% {
+				background-position: top left;
+			}
+
+			50% {
+				background-position: top right;
+			}
+		}
+
+		@keyframes planeAnim
+		{
+			0%, 100% {
+				transform: translateX(0px) rotateY(0deg);
+			}
+
+			49.9% {
+				transform: translateX(900px) rotateY(0deg);
+			}
+
+			50% {
+				transform: translateX(900px) rotateY(180deg);
+			}
+
+			99.9% {
+				transform: translateX(0px) rotateY(180deg);
+			}
+		}
+	</style>
+</head>
+<body>
+
+	<div class="bg">
+		<div class="air-plane"></div>
+	</div>
+
+</body>
+</html>

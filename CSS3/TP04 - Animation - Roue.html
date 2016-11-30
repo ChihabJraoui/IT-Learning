@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TP - Roue - CSS3 Animations</title>
+
+	<style>
+		.container {
+			background-color: #f7e1b5;
+			text-align: center;
+			padding: 50px;
+		}
+		.roue {
+			width: 200px;
+			height: 200px;
+			background-color: #3c763d;
+			border: 2px solid #2b542c;
+			display: inline-block;
+			border-radius: 50%;
+
+			animation: roueAnim 4s linear infinite;
+		}
+		.text {
+			display: inline-block;
+			margin-top: 30px;
+			font-family: Tahoma, sans-serif;
+			font-size: 24px;
+			color: white
+		}
+
+		button {
+			background-color: #1b6d85;
+			border: none;
+			padding: 10px 16px;
+			color: white;
+			cursor: pointer;
+		}
+
+		@keyframes roueAnim {
+			from {
+				transform: rotate(0deg);
+			}
+
+			to {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+
+</head>
+<body>
+
+	<div class="container">
+		<div class="roue" id="roue">
+			<span class="text">Roue</span>
+		</div>
+
+		<br /><br /><br />
+
+		<button onClick="stop()">Arreter</button>
+		<button onClick="start()">Demarrer</button>
+	</div>
+
+	<script>
+		function stop()
+		{
+			document.getElementById('roue').style.animationPlayState = 'paused';
+		}
+
+		function start()
+		{
+			document.getElementById('roue').style.animationPlayState = 'running';
+		}
+	</script>
+
+</body>
+</html>

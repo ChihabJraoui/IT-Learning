@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS3 Animations - TP It-Learning</title>
+
+	<style>
+		.it {
+			position: relative;
+		}
+		.i {
+			font-size: 160px;
+			font-family: Arial;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+		.t {
+			font-size: 200px;
+			font-family: Arial;
+		}
+		.point {
+			background-color: red;
+			width: 30px;
+			height: 30px;
+			position: absolute;
+			border-radius: 50%;
+			top: 30px;
+			left: 8px;
+
+			animation: itAnim .8s infinite;
+		}
+
+
+		/* animation */
+
+		@keyframes itAnim {
+			0%, 100% { transform: translateY(0) }
+			50% { transform: translateY(-20px) }
+		}
+	</style>
+</head>
+<body>
+
+<div class="it">
+	<span class="point"></span>
+	<span class="i">i</span>
+	<span class="t">t</span>
+</div>
+
+</body>
+</html>

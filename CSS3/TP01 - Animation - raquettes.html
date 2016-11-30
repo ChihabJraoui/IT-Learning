@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS3 Animations - TP de Raquettes</title>
+
+	<style>
+
+		/* Style pour l'animation de la div se déplaçant */
+		.container
+		{
+			position: relative;
+			margin: auto;
+			width: 800px;
+			height: 400px;
+			background-color: #EEE;
+			border: solid 1px black;
+		}
+
+		/* Diviseur */
+		.container:after {
+			content: '';
+			position: absolute;
+			z-index: 0;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 50px;
+			height: 100%;
+			background-color: darksalmon;
+		}
+
+		/* Les Raquettes */
+		.div1, .div2
+		{
+			width: 20px;
+			height: 100px;
+			position: absolute;
+		}
+
+		.div1 {
+			background-color: red;
+			border: 1px solid darkred;
+			top: 0;
+			left: 0;
+
+			animation: animDiv1 8s infinite linear;
+		}
+
+		.div2 {
+			background-color: green;
+			border: 1px solid darkgreen;
+			top: 0;
+			right: 0;
+
+			animation: animDiv2 8s infinite linear;
+		}
+
+		/* Boule */
+
+		.ball {
+			background-color: #666;
+			border-radius: 50%;
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			z-index: 2;
+			border: 1px solid #222;
+			top: 50px;
+			left: 100px;
+
+			animation: animBall 8s infinite linear;
+		}
+
+
+		/* Animations */
+
+		@keyframes animDiv1
+		{
+			0%, 25%, 100% {
+				top: 0
+			}
+			50%, 75%
+			{
+				top: 300px
+			}
+		}
+
+		@keyframes animDiv2
+		{
+			0%, 75%, 100% {
+				top: 0
+			}
+
+			25%, 50% {
+				top: 300px;
+			}
+		}
+
+		@keyframes animBall
+		{
+			0%, 100% {
+				top: 25px;
+				left: 20px
+			}
+
+			25% {
+				top: 325px;
+				left: 730px;
+			}
+
+			50% {
+				top: 325px;
+				left: 20px;
+			}
+
+			75% {
+				top: 25px;
+				left: 730px;
+			}
+		}
+
+
+	</style>
+
+</head>
+<body>
+
+
+<div class="container">
+	<div class="div1"></div>
+	<div class="div2"></div>
+	<div class="ball"></div>
+</div>
+
+
+</body>
+</html>
